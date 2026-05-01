@@ -1,0 +1,14 @@
+all:
+  children:
+    control:
+      hosts:
+        k8s-c1:
+    worker:
+      hosts:
+        k8s-w1:
+        k8s-w2:
+  vars:
+    ansible_ssh_user: root
+    ansible_ssh_private_key_file: ~/.ssh/id_rsa.pub
+    ansible_ssh_extra_args: "-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
+    ansible_python_interpreter: /usr/bin/python3

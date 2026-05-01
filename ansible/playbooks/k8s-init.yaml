@@ -1,0 +1,16 @@
+- name: Install Kubernetes
+  hosts: all
+  tasks:
+    - name: Disabled SWAP
+      ansible.builtin.shell:
+        cmd: swapoff -a
+      when: ansible_totalswap_mb > 0
+    - name: Install Packages
+      community.general.apt_rpm:
+        pkg:
+          - cri-tools1.35
+          - kubernetes1.35-kubelet
+          - kubernetes1.35-kubeadm
+          - kubernetes1.35-crio
+        state: latest
+        update_cache: true
